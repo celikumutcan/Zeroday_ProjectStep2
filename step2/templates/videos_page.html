@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block subtitle %}Videos{% endblock subtitle %}
+
+{% block content %}
+    <!-- Link to the CSS file for styling the videos page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/videos_page.css') }}">
+    <div class="table-container">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <!-- Column names -->
+                    <th scope="col">Name</th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Likes</th>
+                    <th scope="col">Dislikes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for video in videos %}
+                    <tr>
+                        <!-- Display the video name -->
+                        <td>{{ video['name'] }}</td>
+                        <!-- Link to watch the video -->
+                        <td><a href="{{ video['url'] }}" target="_blank">Watch Video</a></td>
+                        <td>
+                            <!-- Display the number of likes -->
+                            {{ video['likes'] }}
+                            <!-- Form to like the video -->
+                            <form method="post" style="display:inline;">
+                                <!-- Hidden field to store the video ID -->
+                                <input type="hidden" name="video_id" value="{{ video['id'] }}">
+                                <!-- Button to like the video -->
+                                <button type="submit" name="action" value="like" class="btn btn-primary btn-sm">Like</button>
+                            </form>
+                        </td>
+                        <td>
+                            <!-- Display the number of dislikes -->
+                            {{ video['dislikes'] }}
+                            <!-- Form to dislike the video -->
+                            <form method="post" style="display:inline;">
+                                <!-- Hidden field to store the video ID -->
+                                <input type="hidden" name="video_id" value="{{ video['id'] }}">
+                                <!-- Button to dislike the video -->
+                                <button type="submit" name="action" value="dislike" class="btn btn-dark btn-sm">Dislike</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

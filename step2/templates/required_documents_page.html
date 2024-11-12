@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block subtitle %}Required Documents{% endblock subtitle %}
+
+{% block content %}
+    <!-- Link to the CSS file for styling the required documents page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/required_documents_page.css') }}">
+    <div class="container mt-5">
+        <div class="content-wrapper">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <!-- Column for index number -->
+                            <th>#</th>
+                            <!-- Column for the name of the document -->
+                            <th>Document Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for doc in requirements %}
+                        <tr>
+                            <!-- Display the index of the document -->
+                            <td>{{ loop.index }}</td>
+                            <!-- Display the name of the document -->
+                            <td>{{ doc[1] }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
